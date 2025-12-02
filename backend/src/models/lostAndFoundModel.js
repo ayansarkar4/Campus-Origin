@@ -15,8 +15,10 @@ const lostAndFoundSchema = new Schema({
     required: true,
   },
   photoUrl: {
-    type: String,
+    type: [String], // <--- THIS is correct
+    default: [],
   },
+
   date: {
     type: Date,
     default: Date.now,

@@ -108,7 +108,7 @@ const getAllUsersProfile = asyncHandler(async (req, res) => {
   const usersData = await User.find().select("-password");
   res.status(200).json({
     success: true,
-    usersData,
+    data: usersData,
   });
 });
 

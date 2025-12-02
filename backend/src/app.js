@@ -20,7 +20,9 @@ app.get("/", (req, res) => {
 });
 
 import userRouter from "./routes/userRoute.js";
+import lostAndFoundRouter from "./routes/lostAndFoundRoute.js";
 
 app.use("/api/v1/user", userRouter);
+app.use("/api/v1/lost-and-found", lostAndFoundRouter);
 
 export default app;
