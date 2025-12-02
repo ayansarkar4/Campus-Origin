@@ -10,20 +10,28 @@ const registerUser = asyncHandler(async (req, res) => {
 
   let existedUser = await User.findOne({ email });
   if (existedUser) {
-    res.status(400);
-    throw new Error("User already exists");
+    return res.status(400).json({
+      success: false,
+      message: "User already exists with this email",
+    });
   }
   if (!fullName || !email || !password || !department || !batch) {
-    res.status(400);
-    throw new Error("Please fill all the fields");
+    return res.status(400).json({
+      success: false,
+      message: "Please provide all required fields",
+    });
   }
   if (!email.includes("@")) {
-    res.status(400);
-    throw new Error("Please enter a valid email");
+    return res.status(400).json({
+      success: false,
+      message: "Please enter a valid email",
+    });
   }
   if (password.length < 6) {
-    res.status(400);
-    throw new Error("Password must be at least 6 characters");
+    return res.status(400).json({
+      success: false,
+      message: "Password must be at least 6 characters",
+    });
   }
   const user = await User.create({
     fullName,
@@ -45,26 +53,36 @@ const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    res.status(400);
-    throw new Error("Please fill all the fields");
+    return res.status(400).json({
+      success: false,
+      message: "Please provide all required fields",
+    });
   }
   if (!email.includes("@")) {
-    res.status(400);
-    throw new Error("Please enter a valid email");
+    return res.status(400).json({
+      success: false,
+      message: "Please enter a valid email",
+    });
   }
   if (password.length < 6) {
-    res.status(400);
-    throw new Error("Password must be at least 6 characters");
+    return res.status(400).json({
+      success: false,
+      message: "Password must be at least 6 characters",
+    });
   }
   const user = await User.findOne({ email });
   if (!user) {
-    res.status(400);
-    throw new Error("User does not exist");
+    return res.status(400).json({
+      success: false,
+      message: "Invalid credentials",
+    });
   }
   const passwordMatch = await user.isPasswordCorrect(password, user.password);
   if (!passwordMatch) {
-    res.status(400);
-    throw new Error("Invalid credentials");
+    return res.status(400).json({
+      success: false,
+      message: "Invalid credentials",
+    });
   }
   const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
   res.status(200).json({
@@ -104,8 +122,10 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   //existing user
   const user = await User.findById(userId);
   if (!user) {
-    res.status(404);
-    throw new Error("User not found");
+    return res.status(404).json({
+      success: false,
+      message: "User not found",
+    });
   }
   if (fullName) user.fullName = fullName;
   if (password) user.password = password;

@@ -41,6 +41,11 @@ const lostAndFoundSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  finder: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    default: null,
+  },
 });
 
 const LostAndFound = new mongoose.model("LostAndFound", lostAndFoundSchema);
