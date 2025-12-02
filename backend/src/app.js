@@ -19,4 +19,8 @@ app.get("/", (req, res) => {
   res.send("Api is running");
 });
 
+import userRouter from "./routes/userRoute.js";
+
+app.use("/api/v1/user", userRouter);
+
 export default app;
