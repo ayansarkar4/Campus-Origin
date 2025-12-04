@@ -15,6 +15,7 @@ const userRouter = new Router();
 userRouter.post("/register", registerUser);
 // User Login Route
 userRouter.post("/login", loginUser);
+
 //User Profile
 userRouter.get("/profile", authUser, getUserProfile);
 //get all users profile
