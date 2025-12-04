@@ -23,10 +23,12 @@ import userRouter from "./routes/userRoute.js";
 import lostAndFoundRouter from "./routes/lostAndFoundRoute.js";
 import complainBoxRouter from "./routes/complainBoxRoute.js";
 import adminRouter from "./routes/adminRoute.js";
+import communityRouter from "./routes/communityRoute.js";
 
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/lost-and-found", lostAndFoundRouter);
 app.use("/api/v1/complain-box", complainBoxRouter);
 app.use("/api/v1/admin", adminRouter);
+app.use("/api/v1/community", communityRouter);
 
 export default app;

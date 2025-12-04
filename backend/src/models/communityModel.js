@@ -14,10 +14,15 @@ const communitySchema = new Schema({
     type: String,
     required: true,
   },
-  isPrivate: {
-    type: Boolean,
-    default: false,
+  profileImage: {
+    type: String,
   },
+  members: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
 });
 
 const Community = new mongoose.model("Community", communitySchema);
